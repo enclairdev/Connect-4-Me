@@ -1,0 +1,18 @@
+---
+const ROWS = 5;
+const COLS = 6;
+const rows = Array.from({ length: ROWS }, (_, i) => i);
+const cols = Array.from({ length: COLS }, (_, i) => i);
+---
+
+<div id="game-wrapper" class="game-wrapper">
+  <div id="gameboard" class="gameboard" data-rows={ROWS} data-cols={COLS} style={`--cols:${COLS}`}>
+    {cols.map((col) => (
+      <div class="column" data-col={col} role="button" tabindex="0" aria-label={`Drop in column ${col + 1}`}>
+        {rows.map((row) => (
+          <div class="slot" data-row={row}></div>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

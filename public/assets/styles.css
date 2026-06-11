@@ -1,0 +1,263 @@
+:root {
+    --cols: 6;
+    --rows: 5;
+    --coin-size: 72px;
+}
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family:
+        Verdana,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    background: #0b2140;
+    color: #fff;
+}
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 12px 20px;
+    z-index: 50;
+}
+.app-header .left,
+.app-header .right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+/* Icon buttons (scale sprite so each frame exactly fits the button) */
+.icon-btn {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background-image: url("/assets/buttons.svg");
+    background-repeat: no-repeat;
+    /* scale sprite so each 270×270 frame becomes 48×48 in CSS (4 frames => 192×48) */
+    background-size: 192px 48px;
+    background-position: 0 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+/* Desktop (48×48 buttons): show frames exactly */
+.btn-restart {
+    background-position: 0 0;
+} /* frame 1 */
+.btn-audio {
+    background-position: -48px 0;
+} /* frame 2 (audio on) */
+.btn-audio.muted {
+    background-position: -96px 0;
+} /* frame 3 (audio off) */
+.btn-info {
+    background-position: -144px 0;
+} /* frame 4 */
+
+main.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+/* gameboard */
+.game-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gameboard {
+    --cols: 6;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: 12px;
+    padding: 20px;
+    background: linear-gradient(180deg, #1b3a5a 0%, #0d243b 100%);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 4px;
+    cursor: pointer;
+}
+.slot {
+    width: var(--coin-size);
+    height: var(--coin-size);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+/* coins */
+.coin-bg {
+    width: calc(var(--coin-size) * 0.9);
+    height: calc(var(--coin-size) * 0.9);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("/assets/player_coins.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: 1;
+    box-shadow: inset 0 -6px rgba(0, 0, 0, 0.35);
+}
+
+.coin-bg.player1 {
+    /* brighter yellow tint for player 1 */
+    filter: hue-rotate(62deg) saturate(3);
+}
+
+.coin-bg.player2 {
+    /* default appearance for player 2 */
+    filter: none;
+}
+.coin-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* modal */
+.info-popup {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.info-popup.visible {
+    display: flex;
+}
+.info-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.info-content {
+    position: relative;
+    max-width: 720px;
+    width: calc(100% - 48px);
+    background: #fff;
+    color: #000;
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 110;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.info-text {
+    white-space: pre-wrap;
+}
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* blurred state */
+.blurred {
+    filter: blur(6px);
+}
+
+@media (max-width: 720px) {
+    :root {
+        --coin-size: 56px;
+    }
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        /* scale sprite so each frame becomes 40×40 (4 frames => 160×40) */
+        background-size: 160px 40px;
+    }
+    /* Mobile (40×40 buttons): frames are 40px each */
+    .btn-restart {
+        background-position: 0 0;
+    }
+    .btn-audio {
+        background-position: -40px 0;
+    }
+    .btn-audio.muted {
+        background-position: -80px 0;
+    }
+    .btn-info {
+        background-position: -120px 0;
+    }
+}
+
+/* result banner shown under the gameboard */
+#result-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 0;
+    padding: 12px 18px;
+    gap: 12px;
+    max-width: 720px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 120;
+}
+
+#result-overlay .result-message {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+#overlay-restart {
+    background: #fff;
+    color: #0b2140;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#overlay-restart:hover {
+    opacity: 0.95;
+}
