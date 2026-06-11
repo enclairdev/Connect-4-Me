@@ -50,7 +50,7 @@ body {
     width: 48px;
     height: 48px;
     border: none;
-    background-image: url("/assets/buttons.svg");
+    background-image: url("/p4_connect4/assets/buttons.svg");
     background-repeat: no-repeat;
     /* scale sprite so each 270×270 frame becomes 48×48 in CSS (4 frames => 192×48) */
     background-size: 192px 48px;
@@ -125,7 +125,7 @@ main.main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("/assets/player_coins.svg");
+    background-image: url("/p4_connect4/assets/player_coins.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
