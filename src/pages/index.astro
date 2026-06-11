@@ -2,25 +2,27 @@
 import Header from "../components/Header.astro";
 import Gameboard from "../components/Gameboard.astro";
 import InfoPopup from "../components/InfoPopup.astro";
+import styles from "../assets/styles.css?url";
+import game from "../assets/game.js?url";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connect 4</title>
-    <link rel="stylesheet" href="/assets/styles.css" />
-  </head>
-  <body>
-    <Header />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Connect 4</title>
+        <link rel="stylesheet" href={styles} />
+    </head>
+    <body>
+        <Header />
 
-    <main class="main">
-      <Gameboard />
-    </main>
+        <main class="main">
+            <Gameboard />
+        </main>
 
-    <InfoPopup />
+        <InfoPopup />
 
-        <script type="module" src="/assets/game.js"></script>
+        <script type="module" src={game}></script>
     </body>
 </html>
