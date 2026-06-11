@@ -292,7 +292,7 @@
     try {
       const txt = `Connect 4 is a two-player game where players take turns dropping colored discs into the gameboard. Each disc falls to the lowest available space in a column, and players continue placing discs until the board fills up or someone connects four.
 
-To win, be the first player to connect four of your discs in a row horizontally, vertically, or diagonally.`;
+To win, connect four of your discs in a row horizontally, vertically, or diagonally.`;
       infoTextEl.textContent = txt;
       infoPopup.classList.add("visible");
       main.classList.add("blurred");
