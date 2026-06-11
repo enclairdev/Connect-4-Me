@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  base: "/p4_connect4/",
+  base: "/Connect-4-Me/",
 });

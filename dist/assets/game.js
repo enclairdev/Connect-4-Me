@@ -137,7 +137,7 @@
     spriteImg.style.visibility = "hidden";
     spriteImg.alt = tooltipText;
 
-    const spriteSrc = `/p4_connect4/assets/player${player}_icons.svg`;
+    const spriteSrc = `/Connect-4-Me/assets/player${player}_icons.svg`;
 
     // Append elements first so we can measure overlay size
     slotEl.appendChild(coinBg);
@@ -248,7 +248,7 @@
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
-      const sound = new Audio("/p4_connect4/assets/win_sound.wav");
+      const sound = new Audio("/Connect-4-Me/assets/win_sound.wav");
       sound.play();
     } catch (err) {
       // ignore
@@ -261,7 +261,7 @@
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
-      const sound = new Audio("/p4_connect4/assets/draw_sound.wav");
+      const sound = new Audio("/Connect-4-Me/assets/draw_sound.wav");
       sound.play();
     } catch (err) {
       // ignore
