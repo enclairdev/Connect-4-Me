@@ -2,8 +2,6 @@
 import Header from "../components/Header.astro";
 import Gameboard from "../components/Gameboard.astro";
 import InfoPopup from "../components/InfoPopup.astro";
-import styles from "../assets/styles.css?url";
-import game from "../assets/game.js?url";
 ---
 
 <!doctype html>
@@ -12,7 +10,7 @@ import game from "../assets/game.js?url";
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Connect 4</title>
-        <link rel="stylesheet" href={styles} />
+        <link rel="stylesheet" href="/p4_connect4/assets/styles.css" />
     </head>
     <body>
         <Header />
@@ -23,6 +21,6 @@ import game from "../assets/game.js?url";
 
         <InfoPopup />
 
-        <script type="module" src={game}></script>
+        <script type="module" src="/p4_connect4/assets/game.js"></script>
     </body>
 </html>
