@@ -152,7 +152,6 @@ main.main {
     background-repeat: no-repeat;
     background-size: auto;
     background-position: center;
-    pointer-events: none;
     z-index: 2;
 }
 

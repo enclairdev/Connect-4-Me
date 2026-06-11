@@ -20,6 +20,43 @@
   let audioOn = true;
   let audioCtx = null;
 
+  const altTexts = {
+    1: [
+      "My First Job\nHaving a summer job means having some spending money.",
+      "New Friendships\nYou made some friends in-class that will help you through hard times.",
+      "An Answer\nYou sought medical attention. Now you have a cause and a direction.",
+      "Chemical Band-Aid\nMedication helps, but you still need community and routine.",
+      "Someone Who Cares\nStudent health insurance saves the day, and therapy saves lives.",
+      "10k Steps\nYou're on your feet now, meet your neighbors and clear your mind.",
+      "Post-Covid Prom\nCovid was a bummer, but you have great friends and decent liquor.",
+      "Weekend Roadtrip\nDad says you need a change of scenery. How about a roadtrip?",
+      "Financial Tension\nEveryone struggles with mental health, its okay to lean on others.",
+      "Alice in Wonderland\nSome friends you haven't seen in a while would like to ride the AlpenFury.",
+      "Put Yourself Out There\nYou created a LinkedIn profile, finally you exist to employers!",
+      "A Second Look\nThe Dermatologist solved your adolescent acne, and you like you.",
+      "Climbing the Ladder\nYou achieved your highest rank ever in ranked League of Legends.",
+      "Chess Mentor\nYou played and won a regional chess tournament, and earned a title.",
+      "Pound for Pound\nTaking your physical health seriously sets you up for success.",
+    ],
+    2: [
+      "Snake in the Grass\nYou became proficient in python and started your first project.",
+      "Rookie of the Year\nFinished your first year with a 3.8 cGPA!",
+      "Certified\nCompleted a certificate in Communication and Conflict Resolution.",
+      "All About Perspective\nYou became proficient in photoshop and created your own game art.",
+      "Buying Time\nWhen life got tough, you were not afraid to ask for more time.",
+      "GPA Rebound\nYou hit the bottom, but that only means there's more to improve.",
+      "Making Money Moves\nYou networked with professors and have mentors moving forward.",
+      "Blending it Together\nYou became proficient in blender and finished your first game environment.",
+      "Put to Practice\nYou became proficient in Unity and made your first game!",
+      "The One Percentile\nYou completed your Social Data Analytics course, earning 99%!",
+      "Spinning a Web\nYou became proficient in HTML and CSS. Put your projects out there!",
+      "An Internship\nYou were selected for an internship! There's good and bad about working remotely.",
+      "In 10 Days...\nYou became proficient in JavaScript. Your side projects could be a business.",
+      "Design 1\nYou became proficient in Illustrator. The pen tool is still annoying.",
+      "One Day\nYou will graduate, and all your hard work will have paid off.",
+    ],
+  };
+
   function init() {
     document.querySelectorAll(".column").forEach((colEl) => {
       colEl.addEventListener("click", () =>
@@ -48,13 +85,13 @@
     if (checkWin(row, col, currentPlayer)) {
       gameOver = true;
       playWinSound();
-      showResult(`Player ${currentPlayer} wins`);
+      showResult(`Player ${currentPlayer} Wins!`);
       return;
     }
     if (checkTie()) {
       gameOver = true;
       playDrawSound();
-      showResult("It's a tie");
+      showResult("It's a Draw");
       return;
     }
     currentPlayer = currentPlayer === 1 ? 2 : 1;
@@ -85,6 +122,12 @@
     iconWrap.style.top = "50%";
     iconWrap.style.transform = "translate(-50%, -50%)";
 
+    // Set tooltip early so we have it before appending
+    const altTextArray = altTexts[player];
+    const altIndex = playerIconIndex[player] % altTextArray.length;
+    const tooltipText = altTextArray[altIndex];
+    iconWrap.title = tooltipText;
+
     // Inside wrapper we will place an <img> for the sprite; hiding until loaded
     const spriteImg = document.createElement("img");
     spriteImg.style.position = "absolute";
@@ -92,7 +135,7 @@
     spriteImg.style.top = "0px";
     spriteImg.style.display = "block";
     spriteImg.style.visibility = "hidden";
-    spriteImg.alt = "";
+    spriteImg.alt = tooltipText;
 
     const spriteSrc = `/assets/player${player}_icons.svg`;
 
